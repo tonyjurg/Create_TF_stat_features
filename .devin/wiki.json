@@ -1,0 +1,125 @@
+{
+  "repo_notes": [
+    {
+      "content": ""
+    }
+  ],
+  "pages": [
+    {
+      "title": "Overview",
+      "purpose": "High-level introduction to the Create_TF_stat_features repository: its purpose, the problem it solves, how it fits into the N1904 ecosystem, and links to child pages for deeper detail.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Project Purpose and Context",
+      "purpose": "Explains why this repository exists: extending the N1904-TF dataset with pre-computed statistical features, the relationship to the N1904addons distribution repository, and the motivation for offline feature generation rather than on-the-fly calculation.",
+      "parent": "Overview",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Repository Structure and Setup",
+      "purpose": "Describes the repository layout (root notebook, tf/1.0.0/ output directory, images/ assets), development environment requirements (Python, Jupyter, text-fabric library), and the .gitignore conventions including the stagingarea workflow.",
+      "parent": "Overview",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Core Pipeline: create_statistic_features.ipynb",
+      "purpose": "Overview of the main Jupyter Notebook that drives the entire feature-generation pipeline, linking to child pages covering each major phase: data loading, computation, and export.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Data Loading and Corpus Initialization",
+      "purpose": "Details how the notebook initializes the Text-Fabric engine, loads the N1904 dataset via tf.app.use('CenterBLC/N1904'), and accesses the core TF APIs (F for features, L for locality, T for topology). Covers the node type hierarchy (book, chapter, verse, sentence, group, wg, phrase, subphrase, clause, word) that the pipeline traverses.",
+      "parent": "Core Pipeline: create_statistic_features.ipynb",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Statistical Feature Computation",
+      "purpose": "Deep dive into the four computed features: num_words (word count via L.d locality traversal), text_ttr (Type-to-Token Ratio on surface wordforms via F.text), lemma_ttr (TTR on lemma forms via F.lemma), and morph_ttr (TTR on morphological tags via F.morph). Explains the set-based unique-type counting algorithm, the fixed-point string truncation to 10 characters, and the inverse relationship between text length and TTR.",
+      "parent": "Core Pipeline: create_statistic_features.ipynb",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Metadata Generation and Feature Export",
+      "purpose": "Explains the createMetadata() helper function, the nodedata dictionary structure mapping feature names to value dictionaries, and the TF.save() call that serializes everything to .tf files in tf/1.0.0/. Covers provenance fields (author, coreData, license, version, dateWritten) and how the output files are subsequently moved to the N1904addons repository.",
+      "parent": "Core Pipeline: create_statistic_features.ipynb",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Validation and Visualization",
+      "purpose": "Covers the post-export validation steps: loading the addon features via use('CenterBLC/N1904', mod='tonyjurg/N1904addons/tf/'), calling N1904.isLoaded() to verify feature indexing, and the pandas/matplotlib bar chart that plots TTR values per book to visually confirm correctness and observe the inverse length-TTR relationship.",
+      "parent": "Core Pipeline: create_statistic_features.ipynb",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Generated Feature Files (tf/1.0.0/)",
+      "purpose": "Overview of the four .tf output files produced by the pipeline and their role as distributable Text-Fabric addon features, linking to child pages for each feature's specification.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "num_words Feature",
+      "purpose": "Documents the num_words.tf file: its @valueType=int schema, the node-to-integer mapping format, the starting node offset (137780), how values are accessed via F.num_words.v(node) or Fs('num_words').v(node), and example values showing word counts for books and sub-book structural units.",
+      "parent": "Generated Feature Files (tf/1.0.0/)",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "lemma_ttr, morph_ttr, and text_ttr Features",
+      "purpose": "Documents the three TTR feature files: their shared @valueType=str schema (floating-point ratios stored as strings), the two-range node mapping (container nodes starting at 137780, then single-word nodes starting at 180573 with values near 1.0), the semantic difference between the three dimensions (surface form vs. lemma vs. morphological tag), and how to access them via the TF API.",
+      "parent": "Generated Feature Files (tf/1.0.0/)",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Glossary",
+      "purpose": "Definitions of all codebase-specific terms, abbreviations, and domain concepts an onboarding engineer needs to understand this repository and the broader N1904/Text-Fabric ecosystem.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    }
+  ]
+}
